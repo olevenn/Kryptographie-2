@@ -23,7 +23,8 @@ s2 = (beta ** gamma2) * (gamma2 ** delta2) % p
 print(s2)
 print((alpha ** x) % p)
 
-## wir schreiben zwei Schleifen für r und a und testen alle Kombinationen aus damit finden wir die Anzahl der gültigen Signaturen heraus
+# wir schreiben zwei Schleifen für r und a und testen alle Kombinationen, damit finden wir die Anzahl der gültigen
+# Signaturen heraus
 count = 0
 for r in range(p):
     gamma = (alpha ** r) % p

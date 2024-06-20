@@ -3,8 +3,6 @@ import sympy
 from sympy import mod_inverse
 from random import randint
 
-
-
 p = q = c = 0
 
 while not sympy.isprime(p):
@@ -27,19 +25,20 @@ print("alpha: " + str(alpha))
 print("a: " + str(a))
 print("beta: " + str(beta))
 
+#Create Message
 message = 1234
 hashMessage = sha256(message.to_bytes(message.bit_length(), 'big'))
 hashMessage = int.from_bytes(hashMessage.digest(), 'big')
-#print("hashMessage: " + str(hashMessage))
 
+# r random number
 r = randint(1, q - 1)
+
+# gamma and delta
 gamma = pow(alpha, r, p) % q
-#print("gamma: " + str(gamma))
 delta = ((hashMessage + (a * gamma)) * mod_inverse(r, q)) % q
-#print("delta: " + str(delta))
 
 e1 = hashMessage * mod_inverse(delta, q) % q
-#print("e1: " + str(e1))
 e2 = gamma * mod_inverse(delta, q) % q
-#print("e2: " + str(e2))
+
+# Test
 print(((pow(alpha, e1, p) * pow(beta, e2, p)) % p) % q == gamma)

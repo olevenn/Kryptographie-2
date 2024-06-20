@@ -1,3 +1,4 @@
+import random
 from random import randint
 from sympy import mod_inverse
 
@@ -47,10 +48,14 @@ print("e: " + str(e))
 print("d: " + str(d))
 
 m = 20
-r = 0
-for i in range(p):
-    if i ** e % n != 1:
-        r = i
-        break
-ss = ((r ** (e*d)) * (m**d)) % n
-s = mod_inverse(r, n) * ss
+r = random.randint(0, e)
+
+while pow(r, e, n) == 1:
+    r = random.randint(0, e)
+
+s_ = (r * pow(m, d, n)) % n
+r_ = mod_inverse(r, n)
+s = (r_ * s_) % n
+
+ver = pow(m, d * e, n) == pow(s, e, n) == m
+print(ver)
